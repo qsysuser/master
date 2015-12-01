@@ -1,7 +1,7 @@
 'use strict';
 
 const AppSettings = {
-  appTitle: 'AngularJS Template',
+  appTitle: 'Template',
   apiUrl: '/api/v1'
 };
 
