@@ -29,3 +29,5 @@ templates.js
 #webstorm
 .idea
 /.project
+/.tern-project
+/.settings/
