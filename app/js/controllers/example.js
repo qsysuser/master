@@ -5,7 +5,7 @@ function ExampleCtrl() {
   // ViewModel
   const vm = this;
 
-  vm.title = 'Summit Consulting AngularJS Template';
+  vm.title = 'Summit Consulting AngularJS Template!';
   vm.number = 1234;
 
 }
