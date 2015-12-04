@@ -11,7 +11,7 @@ describe('Unit: ExampleCtrl', function() {
     angular.mock.module('app');
 
     angular.mock.inject(function($controller) {
-      ctrl = $controller('ExampleCtrl');
+      ctrl = $controller('MainController');
     });
   });
 

@@ -1,0 +1,155 @@
+//colors
+$color_fuscous_gray_approx: #4e4e4e;
+$color_endeavour_approx: #00529c;
+$color_storm_dust_approx: #656565;
+$blue: blue;
+$color_curious_blue_approx: #3283cc;
+$color_cape_cod_approx: #424242;
+
+//fonts
+$font_0: Arial;
+$font_1: Verdana;
+$font_2: sans-serif;
+
+//@extend-elements
+//original selectors
+//body, p, li, td, th
+%extend_1 {
+	color: $color_fuscous_gray_approx;
+	font-family: $font_0, $font_1, $font_2;
+	font-size: 9pt;
+	font-weight: normal;
+}
+
+
+body {
+	@extend %extend_1;
+}
+p {
+	@extend %extend_1;
+	line-height: 23px;
+}
+li {
+	@extend %extend_1;
+}
+td {
+	@extend %extend_1;
+}
+th {
+	@extend %extend_1;
+	font-weight: bold;
+}
+label {
+	color: $color_endeavour_approx;
+}
+input {
+	color: $color_storm_dust_approx;
+	vertical-align: middle;
+}
+select {
+	color: $color_storm_dust_approx;
+	vertical-align: middle;
+}
+a {
+	color: $blue;
+	&:visited {
+		color: $blue;
+	}
+	img {
+		border: none;
+	}
+	&.backtotop {
+		font-size: 0.8em;
+		margin: 1em 0 0;
+	}
+}
+dl {
+	dt {
+		margin-bottom: 0.5em;
+		font-weight: bold;
+	}
+	dd {
+		margin-bottom: 0.5em;
+		margin-left: 1.5em;
+	}
+}
+ul {
+	li {
+		margin-bottom: 0.5em;
+		line-height: 18px;
+	}
+	ul {
+		list-style-type: square;
+		ul {
+			list-style-type: circle;
+		}
+	}
+}
+ol {
+	li {
+		margin-bottom: 0.5em;
+		line-height: 18px;
+	}
+	ul {
+		list-style-type: square;
+		ul {
+			list-style-type: circle;
+		}
+	}
+	ol ul {
+		list-style-type: circle;
+	}
+}
+h1 {
+	color: $color_curious_blue_approx;
+	font-family: $font_1, $font_2;
+	font-size: 24px;
+	font-weight: normal;
+	margin: 0 0 10px 0;
+	padding: 0;
+	text-transform: lowercase;
+}
+h2 {
+	color: $color_curious_blue_approx;
+	font-family: $font_0, $font_1, $font_2;
+	font-size: 14px;
+	font-weight: bold;
+	margin: 0;
+	margin-bottom: 8px;
+	padding: 0;
+}
+h3 {
+	color: $color_curious_blue_approx;
+	font-family: $font_0, $font_1, $font_2;
+	font-size: 13px;
+	font-weight: bold;
+	margin: 0;
+	margin-bottom: 8px;
+	padding: 0;
+}
+h4 {
+	color: $color_cape_cod_approx;
+	font-family: $font_0, $font_1, $font_2;
+	font-size: 13px;
+	font-weight: bold;
+	margin: 0;
+	padding: 0;
+}
+h5 {
+	font-family: $font_0, $font_1, $font_2;
+	font-size: 9px;
+	font-weight: normal;
+	color: $color_curious_blue_approx;
+	margin: 0;
+	margin-bottom: 5px;
+	padding: 0;
+}
+h6 {
+	font-family: $font_1, $font_2;
+	font-weight: normal;
+	margin: 0;
+	padding: 0;
+}
+.fineprint {
+	font-size: 0.8em;
+}

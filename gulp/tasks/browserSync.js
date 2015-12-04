@@ -23,6 +23,7 @@ gulp.task('browserSync', function() {
         return next();
       }
     },
+    startPath: config.startPath,
   	port: config.browserPort,
   	ui: {
     	port: config.UIPort

@@ -1,8 +1,8 @@
 'use strict';
 
 const AppSettings = {
-  appTitle: 'Template',
-  apiUrl: '/api/v1'
+  appTitle: 'Template'
+  //apiUrl: '#/ng-app'
 };
 
 export default AppSettings;

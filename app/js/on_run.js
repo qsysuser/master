@@ -1,6 +1,6 @@
 'use strict';
 
-function OnRun($rootScope, AppSettings) {
+function OnRun($rootScope) {
   'ngInject';
 
   // change page title based on state

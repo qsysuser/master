@@ -2,8 +2,9 @@
 
 export default {
 
-  browserPort: 3000,
-  UIPort: 3001,
+  startPath: '/',	
+  browserPort: 9441,
+  UIPort: 9440,
 
   sourceDir: './app/',
   buildDir: './build/',
