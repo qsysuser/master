@@ -1,9 +1,9 @@
 'use strict';
 
+//angular modules
 import angular from 'angular';
-
-// angular modules
 import 'angular-ui-router';
+import 'ng-idle';
 import './templates';
 import './filters';
 import './controllers';
@@ -13,6 +13,7 @@ import './directives';
 // create and bootstrap application
 const requires = [
   'ui.router',
+  'ngIdle',
   'templates',
   'app.filters',
   'app.controllers',

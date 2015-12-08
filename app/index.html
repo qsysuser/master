@@ -1,59 +1,46 @@
-<!doctype html>
-<html>
-  <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-      <title ng-bind="pageTitle"></title>
-      <meta name="description" content="">
-      <meta name="viewport" content="width=device-width">
-
-      <link rel="stylesheet" href="css/main.css">
-      
-  </head>
-  <body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<style> html { display:none; } </style>
+	<script>
+	if (self == top)
+	{ 
+		document.documentElement.style.display = 'block'; 
+	}
+	else
+	{
+		top.location = self.location;
+	}
+	</script ng-app="">
+	<title ng-bind="pageTitle"></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="/favicon.ico" rel="icon" type="image/vnd.microsoft.icon" />
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7,IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width">
+    
+	<link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
+  	<script src="vendor/jquery/dist/jquery.min.js"></script>
+  	<script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
   	<div id="layout_container">
-	    <div>HEADER</div>
+	    <div id="layout_header" header-directive></div>
 	    <div id="layout_body" class="contentArea">
 	    	<!-- 
 	    	<c:if test="${userHasMultiAccounts}">
 	    		<tags:selectAccount />
 	    	</c:if>
 	    	 -->
-	    	<div id="layout_sidebar">
-		    	<div>SIDE NAVIGATION</div>
-				<div>
-					<form id="layout_searchform" action="${summitholdingsContextPath}/Search">
-						<label for="search_query">search</label>
-						<input id="search_query" name="query" type="text" value="" class="search_field" />
-						<input id="search_button" type="image" src="${summitholdingsContextPath}/themes/rounded_grey/images/buttons/grayArrow.gif" class="search_button" alt="Search" title="Search" />
-					</form>
-				</div>
-				<div id="layout_featured">
-					<a href="${summitholdingsContextPath}/LegacyAppRedirect?location=writenow">
-						<img id="featured_writenow" class="featured_item" border="0" alt="WriteNow® Quoting Service" src="${summitholdingsContextPath}/themes/rounded_grey/images/ads/writenow.gif">
-					</a>
-					
-					<a href="${summitholdingsContextPath}/PageReader/employers/reportInjury.html">
-						<img id="featured_reportaninjury" class="featured_item" width="190" border="0" height="60" alt="Report an Injury" src="${summitholdingsContextPath}/themes/rounded_grey/images/ads/reportAnInjury.gif">
-					</a>
-					
-					<a href="${summitholdingsContextPath}/PageReader/employers/findMedicalProvider.html">
-						<img id="featured_findaprovider" class="featured_item" width="190" border="0" height="77" alt="Find a Provider" src="${summitholdingsContextPath}/themes/rounded_grey/images/ads/findAProvider.gif">
-					</a>
-					
-					<a href="${summitholdingsContextPath}/PageReader/employers/safety/safetyServices.html">
-						<img id="featured_safetyinfo" class="featured_item" width="190" border="0" height="60" alt="Safety Information" src="${summitholdingsContextPath}/themes/rounded_grey/images/ads/safetyInfo.gif">
-					</a>
-				</div>
-	    	</div>
+	    	<div id="layout_sidebar" sidebar-directive></div>
     		<div id="layout_content_container" class="right">
 				<table id="layout_content_rounded_corner" border="0" cellpadding="0" cellspacing="0">
 					<tr>
-						<td class="with_vertical_bar" id="layout_content">
-					      <div ui-view="search"></div>
-					      <div ui-view="top1"></div>
-					      <div ui-view="middle1"></div>
-					      <div ui-view="bottom1"></div>
+						<td class="{{with_vertical_bar}}" id="layout_content">
+					      <div ui-view="main"></div>
+					      <div ui-view="middle"></div>
+					      <div ui-view="bottom"></div>
 						</td>
 					</tr>	
 				</table>
@@ -61,8 +48,6 @@
 	    </div>
 	    <div id="layout_footer" class="footer" footer-directive></div>
 	</div>
-      
-
-      <script src="js/main.js"></script>
-  </body>
+    <script src="js/main.js"></script>
+</body>
 </html>

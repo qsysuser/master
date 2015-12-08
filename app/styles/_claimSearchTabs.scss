@@ -1,0 +1,38 @@
+.nav-tabs > li {
+    margin-right: 4px;
+}
+
+.nav-tabs > li > a {
+	background-color: #eee;
+    border-radius: 4px 4px 0 0;
+    line-height: 1.42857;
+    margin-bottom: 0px;
+    font-weight: bold;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover {
+    border-radius: 4px 4px 0 0;
+    line-height: 1.42857;
+    margin-right: 2px;
+    margin-bottom: 0px;
+    font-weight: bold;
+}
+
+.tab-pane {
+    background: #FFFFF;
+    box-shadow: 0;
+    border-radius: 0;
+    text-align: left;
+    padding-left: 8px;
+    padding-top: 10px;
+}
+
+.tab-pane table {
+	border-collapse: separate;
+	border-spacing: 3px;
+}
+
+.tab-pane div {
+	padding-bottom: 5px;
+}

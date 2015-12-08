@@ -1,0 +1,35 @@
+{
+  "name": "ng-app",
+  "description": "Summit Angular Template",
+  "main": "",
+  "authors": [
+    "Rufino Medicielo <qsysuser@yahoo.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "express",
+    "gulp",
+    "browserify",
+    "angular",
+    "sass",
+    "karma",
+    "jasmine",
+    "protractor",
+    "boilerplate"
+  ],
+  "homepage": "https://github.com/qsysuser/master",
+  "moduleType": [
+    "globals"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "/app/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6"
+  }
+}

@@ -10,9 +10,6 @@ function MainController() {
   var1.title = "AngularJS, Gulp, and Browserify! Written with keyboards and love!";
 
   var1.number = 1234;
-
-  //var promise = ExampleService.get();
-  //alert(promise.data);
 }
 
 export default {

@@ -1,0 +1,25 @@
+<div ui-view="side-navigation"></div>
+<div>
+	<form id="layout_searchform" action="{{summitholdings.contextPath + '/Search'}}">
+		<label for="search_query">search</label>
+		<input id="search_query" name="query" type="text" value="" class="search_field" />
+		<input id="search_button" type="image" src="images/buttons/grayArrow.gif" class="search_button" alt="Search" title="Search" />
+	</form>
+</div>
+<div id="layout_featured">
+	<a href="{{summitholdings.contextPath + '/LegacyAppRedirect?location=writenow'}}">
+		<img id="featured_writenow" class="featured_item" border="0" alt="WriteNow® Quoting Service" src="images/ads/writenow.gif">
+	</a>
+	
+	<a href="{{summitholdings.contextPath + '/PageReader/employers/reportInjury.html'}}">
+		<img id="featured_reportaninjury" class="featured_item" width="190" border="0" height="60" alt="Report an Injury" src="images/ads/reportAnInjury.gif">
+	</a>
+	
+	<a href="{{summitholdings.contextPath + '/PageReader/employers/findMedicalProvider.html'}}">
+		<img id="featured_findaprovider" class="featured_item" width="190" border="0" height="77" alt="Find a Provider" src="images/ads/findAProvider.gif">
+	</a>
+	
+	<a href="{{summitholdings.contextPath + '/PageReader/employers/safety/safetyServices.html'}}">
+		<img id="featured_safetyinfo" class="featured_item" width="190" border="0" height="60" alt="Safety Information" src="images/ads/safetyInfo.gif">
+	</a>
+</div>

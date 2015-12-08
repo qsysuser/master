@@ -1,0 +1,23 @@
+<div id="layout_logo_container">
+	<a href="{{summitholdings.contextPath + '/Home'}}">
+		<img src="images/logo.png" border="0" alt="Summit&reg; ...the people who know workers' comp" />
+	</a>
+</div>
+<div id="layout_resources_menu" class="menu">
+	<a href="{{summitholdings.contextPath + '/PageReader/employers/ourEmployers.html'}}">Employer Resources</a>
+	<img src="images/header/spacerTopMenu.gif" border="0" alt="" class="spacer" width="4" height="22"/>
+	<a href="{{summitholdings.contextPath + '/PageReader/workers/injuredWorkers.html'}}">Injured Workers</a>
+	<img src="images/header/spacerTopMenu.gif" border="0" alt="" class="spacer" width="4" height="22"/>
+	<a href="{{summitholdings.contextPath + '/PageReader/providers/ourProviders.html'}}">Provider Resources</a>
+</div>
+<div class="menuSecondary">
+	<a href="{{summitholdings.contextPath + '/BusinessCenter'}}">Business Center</a>
+	<a href="{{summitholdings.contextPath + '/PageReader/forms/index.html'}}">Forms</a>
+	<a href="{{summitholdings.contextPath + '/PageReader/aboutsummit/ourcompanies.html'}}">About Summit</a>
+	<span ng-if="isLoggedIn()">
+		<a href="{{summitholdings.contextPath + '/LogOut'}}">Log Out</a>
+	</span>
+	<span ng-if="!isLoggedIn()">
+		<a href="{{summitholdings.contextPath + '/LogIn'}}">Log In</a>
+	</span>	
+</div>

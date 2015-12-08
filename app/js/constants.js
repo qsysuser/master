@@ -1,7 +1,10 @@
 'use strict';
 
 const AppSettings = {
-  appTitle: 'Template'
+  appTitle: 'Summit',
+  summitholdings: {
+	contextPath: '/wc'  
+  }
   //apiUrl: '#/ng-app'
 };
 

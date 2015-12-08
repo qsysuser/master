@@ -1,11 +1,333 @@
 @import 'text';
-@import 'site';
-@import 'vars';
-@import 'typography';
+/* @import 'claimSearchTabs'; */
 
 body {
-  font-family: Helvetica, sans-serif;
-  color: $font-color--dark;
-  background-color: $background--light;
-  padding: $half-space;
+	background-image: url(../images/bg/page.jpg);
+	background-position: top;
+	background-repeat: repeat-x;
+	background-color: #FFFFFF;
+	margin-top: 20px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-bottom: 15px;
+	font-family: Arial, Verdana, sans-serif;
 }
+
+#layout_container{
+	height: 100%;
+	width: 1055px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* HEADER AREA -- INCLUDES TOP MENU / LOGO, LARGE PHOTOS, SECONDARY MENU ON HOME PAGE */
+#layout_header{
+	background-color: #0066CC;
+	background-image: url(../images/bg/pageHeader.gif);
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-position: top;	
+	border-bottom: solid 4px #FFFFFF;
+	border-top: solid 4px #FFFFFF;
+	border-left: solid 4px #FFFFFF;
+	border-right: solid 4px #FFFFFF;
+	height: 120px;
+	margin: 0 22px;
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 12px;
+	color: #FFFFFF;
+	vertical-align: middle;
+}
+#layout_header #layout_logo_container{
+	padding-top: 10px;
+	padding-left: 15px;
+	float: left;
+	width: 300px;
+}
+#layout_header #layout_resources_menu{
+	text-align: right;
+	vertical-align: middle;
+	float: right;
+	width: 600px;
+	margin-top: 50px;
+	margin-right: 10px;
+}
+#layout_header #layout_resources_menu img
+{
+	vertical-align: middle;
+}
+#layout_header #layout_resources_menu a, 
+#layout_header #layout_resources_menu a:link, 
+#layout_header #layout_resources_menu a:visited, 
+#layout_header #layout_resources_menu a:active{
+	font-weight: bold;
+	text-decoration: none;
+	color: #FFFFFF;
+	margin-bottom: 5px;
+}
+#layout_header #layout_resources_menu a:hover{
+	color: #FEC501;
+	font-weight: bold;
+}
+#layout_header #layout_resources_menu .spacer{
+	margin-left: 15px;
+	margin-right: 15px;
+}
+/* HEADER AREA ENDS -- INCLUDES TOP MENU / LOGO, LARGE PHOTOS, SECONDARY MENU ON HOME PAGE */
+
+
+/* HEADER SECONDARY MENU HOME PAGE  */
+#layout_header .menuSecondary{
+	text-align: right;
+	vertical-align: middle;
+	float: right;
+	width: 600px;
+	margin-top: 20px;
+	margin-right: 10px;
+}
+#layout_header .menuSecondary a, 
+#layout_header .menuSecondary a:link, 
+#layout_header .menuSecondary a:visited, 
+#layout_header .menuSecondary a:active{
+	font-weight: bold;
+	text-decoration: none;
+	color: #FFFFFF;
+	margin-left: 30px;
+	margin-bottom: 5px;
+}
+#layout_header .menuSecondary a:hover{
+	color: #FEC501;
+	font-weight: bold;
+}
+/* HEADER SECONDARY MENU HOME PAGE  */
+
+#layout_navigation_container{
+	background-image: url("../images/insideMenu/bottom.gif");
+	background-repeat: no-repeat;
+	background-position: bottom;
+	color: white;
+	font-size: 12px;
+	padding-bottom: 26px;
+	margin-bottom: 30px;
+	width: 189px;
+}
+#layout_navigation_container ul{
+	background-color:#A1A1A1;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+#layout_navigation_container ul li{
+	color: white;
+	font-size: 12px;
+	line-height: normal;
+	padding: 18px 0 2px 25px;
+	margin: 0 0 0 0;
+}
+#layout_navigation_container ul li.container.collapsed,
+#layout_navigation_container ul li.container.expanded,
+#layout_navigation_container ul li.container{
+	background-image: url("../images/insideMenu/arrowClosed.gif");
+	background-repeat: no-repeat;
+	background-position: 175px 20px;
+	padding-right: 15px;
+}
+#layout_navigation_container ul li.container.expanded{
+	background-image: url("../images/insideMenu/arrowExpanded.gif");
+}
+#layout_navigation_container ul li ul{
+	display: none;
+}
+#layout_navigation_container ul li.selected ul{
+	display: block;
+}
+#layout_navigation_container ul li ul li{
+	padding: 0 0 0.5em 25px;
+	margin: 0;
+}
+#layout_navigation_container a{
+	color: white;
+	text-decoration: none;
+}
+#layout_navigation_container a:hover{
+	text-decoration: underline;
+}
+
+/* CONTENT AREA HOME */
+#layout_body{
+	clear: both;
+	text-align: center;
+	vertical-align: middle;
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 9px;
+	color: #6f6f6f;
+	margin-bottom: 20px;
+	margin-left: 22px;
+	margin-right: 22px;
+	margin-top: 5px;
+}
+
+/* SIDEBAR - LEFT NAVIGATION & CONTENT */
+#layout_body #layout_sidebar{
+	text-align: left;
+	width: 190px;
+	float: left;
+	padding-top: 15px;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+}
+#layout_body #layout_sidebar #layout_featured .featured_item{
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+#layout_body #layout_sidebar form#layout_searchform label{
+	color: #00529C;
+	font-family: Verdana, sans-serif;
+	font-size: 14px;
+	padding-left: 2px;
+	padding-top: 2px;
+}
+#layout_body #layout_sidebar form#layout_searchform input.search_field{
+	border: solid 1px #E0E0E0;
+	color: #656565;
+	font-size: 10px;
+	height: 20px;
+	padding: 3px 0 0 3px;
+	vertical-align: middle;
+	width: 110px;
+}
+#layout_body #layout_sidebar form#layout_searchform input.search_button{
+	padding-left: 3px;
+	vertical-align: middle;
+}
+/* SIDEBAR END */
+
+#layout_body #layout_content_container{
+	float: right;
+	width: 815px;
+	text-align: left;
+	vertical-align: top;
+}
+#layout_body.without_sidebar #layout_content_container{
+	width: 100%;
+}
+#layout_body  #layout_content_container #layout_precontent{
+	/* move the precontent up so that it touches the header*/
+	margin-bottom: -9px;
+	position: relative;
+	top: -9px;
+}
+
+#layout_body #layout_content_container table#layout_content_rounded_corner{
+	margin-top: 15px;
+	margin-bottom: 10px;
+	background-color: #FFFFFF;	
+    border-collapse:separate;
+    border:solid #FFFFFF 1px;
+    border-radius:10px;
+    -moz-border-radius:10px;
+	padding: 10px 10px 20px 10px;
+	width: 100%;
+}
+
+#layout_body #layout_content_container table#layout_content_rounded_corner td:first-child {
+     border-left: none;
+}
+
+/* CONTENT AREA HOME END -- INCLUDES LEFT COLUMN AND TEXT AREA */
+
+#layout_content
+{
+	background-color: #FFFFFF;
+	vertical-align: top;
+}
+#layout_content.with_vertical_bar
+{
+	background-color: #FFFFFF;
+	background-image: url(../images/grayLineVertical.gif);
+	background-repeat: repeat-y;
+	padding-left: 50px;
+}
+#layout_content.with_vertical_bar h1
+{
+	/*
+	we want to cover up the line added in #layout_content{}
+	so we added a background color and moved the element left
+	*/
+	background-color: white;
+	margin: 0;
+	padding: 0 0 10px 0;
+	position: relative;
+	left: -35px;
+}
+
+/* PARTNERS AREA -- INCLUDES IMAGES FOR PARTNERS ON THE HOME PAGE */
+#layout_partners{
+	clear: both;
+	text-align: center;
+	vertical-align: middle;
+	margin-left: 22px;
+	margin-right: 22px;
+	padding-bottom: 10px;
+}
+/* PARTNERS AREA ENDS */
+
+
+
+/* FOOTER AREA -- INCLUDES HR LINES AND TEXT LINKS */
+#layout_footer{	
+	clear: both;
+	text-align: center;
+	vertical-align: middle;
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 10px;
+	color: #6F6F6F;
+	text-transform: uppercase;
+	margin-left: 22px;
+	margin-right: 22px;
+}
+#layout_footer ul{
+	border-top: solid 1px #E1DEDE;
+	border-bottom: solid 1px #E1DEDE;
+	display: block;
+	list-style-type: none;
+	margin: 0;
+	padding: 10px 0 10px 0;
+	text-align: center;
+	text-transform: uppercase;
+}
+#layout_footer ul li{
+	border-right: 1px solid #BCBCBC;
+	font-size: 10px;
+	display: inline;
+	padding: 0 1em;
+}
+#layout_footer ul li.last{
+	border-right: none;
+}
+
+#layout_footer ul li a, 
+#layout_footer ul li a:link, 
+#layout_footer ul li a:visited, 
+#layout_footer ul li a:active{
+	text-decoration: none;
+	color: #6f6f6f;
+}
+#layout_footer ul li a:hover{
+	text-decoration: underline;
+}
+
+#layout_footer div#layout_disclaimer
+{
+	margin: 5px 0 0 0;
+	padding: 15px 0 0 55px;
+	vertical-align: middle;
+}
+#layout_footer span.copyright{
+	color: #6F6F6F;
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 9px;
+}
+/* FOOTER AREA ENDS -- INCLUDES HR LINES AND TEXT LINKS */
