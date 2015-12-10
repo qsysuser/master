@@ -1,6 +1,6 @@
 'use strict';
 
-function OnRun($rootScope, Idle, AppSettings) {
+function OnRun($rootScope, $state, $stateParams, Idle, AppSettings) {
   'ngInject';
 
   Idle.watch();
@@ -12,6 +12,11 @@ function OnRun($rootScope, Idle, AppSettings) {
   //window.alert('Your session has ended due to inactivity.');
   //window.location.reload();
   //}, 1800000);
+  
+  //window.alert($state.current.name);
+  //$rootScope.previousState = fromState.name.name;
+  //$rootScope.$state = $state;
+  
   
   // change page title based on state
   $rootScope.$on('$stateChangeSuccess', (event, toState) => {

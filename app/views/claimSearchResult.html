@@ -1,0 +1,1063 @@
+<style type="text/css">
+div.header_section
+{
+	background-color: #E4E4E4;
+	border: 1px solid #CCCCCC;
+	margin: 0;
+	padding: 1em 1em;
+}
+div.header_section em.section_title,
+div.header_section div.section_title,
+div.header_section span.section_title
+{
+	font-style: normal;
+	font-weight: bold;
+}
+div.header_section label
+{
+	margin: 0 1em 0 0;
+}
+div.claims
+{
+	width: 100%; 
+	max-height:700px;
+	overflow-y: scroll;
+}
+</style>
+<h1>Claim Search Result</h1>
+<hr>
+<div class="claims">
+	<div style="padding-bottom: 0em;">
+	
+		<div style="border:0px gray solid;">
+		<div style="background-color: #F2F2F2; clear: both; border-bottom: 1px gray solid;">
+			<table width="100%">
+				<tr>
+					<td width="130" nowrap="nowrap">Policy Number</td>
+					<td>{{claim.policy}}</td>
+				</tr>
+				<tr>
+					<td>Policy Holder</td>
+					<td>City Cab Company of Orlando, Inc.</td>
+				</tr>
+				<tr>
+					<td>Policy Period</td>
+					<td>04/01/2015 - 04/01/2016</td>
+				</tr>					
+			</table>
+			<table width="100%">
+				<tr>
+					<td><strong>CABELLO, MICHELLE</strong><c:out value="${detail.employee.employeeName}" escapeXml="false"/></td>
+					<td style="text-align: right;">
+						<c:if test="${detail.claimStatus == 'Open' and detail.adjustorSummaryDocumentFound eq true}">
+							<a href="${pageContext.request.contextPath}/ClaimsAdjustorSummaryViewer?account=${detail.claimsAccount}&casenumber=${detail.caseNumber}" >Adjustor Summary</a>
+						</c:if>	
+					</td>
+				</tr>
+			</table>
+		</div>
+		<table width="100%">
+			<col style="width: 10em; vertical-align: top;" />
+			<tr>
+				<td width="90" nowrap="nowrap">Job Title</td>
+				<td width="150" nowrap="nowrap"><c:out value="${detail.employee.jobTitle}" escapeXml="false"/></td>
+				<td rowspan="10" style="vertical-align: top;" width="400">
+					<table>
+						<thead>
+							<tr>
+								<th width="100">&nbsp;</th>
+								<th style="text-align: right;" width="75">Indemnity</th>
+								<th style="text-align: right;" width="75">Medical</th>
+								<th style="text-align: right;" width="75">Other</th>
+								<th style="text-align: right;" width="75">Total</th>
+							</tr>
+						</thead>
+						<tr>
+							<td><strong>Paid this Month</strong></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidThisMonthIndemnity}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidThisMonthMedical}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidThisMonthOther}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidThisMonthTotal}" type="currency" /></td>
+						</tr>
+						<tr>
+							<td><strong>Paid To Date</strong></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidToDateIndemnity}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidToDateMedical}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidToDateOther}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidToDateTotal}" type="currency" /></td>
+						</tr>
+						<tr>
+							<td><strong>Reserves</strong></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.reservesIndemnity}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.reservesMedical}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.reservesOther}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.reservesTotal}" type="currency" /></td>
+						</tr>
+						<tr>
+							<td><strong>Total Incurred</strong></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.totalIncurredIndemnity}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.totalIncurredMedical}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.totalIncurredOther}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.totalIncurredTotal}" type="currency" /></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Injury</td>
+				<td><c:out value="${detail.descriptionOfInjury}" escapeXml="false"/></td>
+			</tr>
+			<tr>
+			  <td>Status</td>
+			  <td><c:out value="${detail.claimStatus}"/></td>
+		  	</tr>
+		  	<c:choose>
+			  	<c:when test="${not empty detail.claimDateClosed}">
+					<tr>
+					  <td>Closed Date</td>
+					  <td><fmt:formatDate value="${detail.claimDateClosed}" pattern="MM/dd/yyyy" /></td>
+				  	</tr>
+				</c:when>
+		  	</c:choose>
+			<tr>
+				<td>Case #</td>
+		        <td><fmt:formatNumber value="${detail.caseNumber}" pattern="000000"></fmt:formatNumber></td>
+			</tr>
+			<c:if test="${not empty detail.claimAdjustorName}">
+				<tr>
+					<td>Adjustor</td>
+					<td colspan="2">
+						<%--
+						If the adjustor can be contacted by e-mail, then we need to display the link.  Otherwise
+						we want to just display the name
+						--%>
+						<c:choose>
+							<c:when test="${detail.claimAdjustorEmailFound == true}">
+								<a href="${pageContext.request.contextPath}/ClaimsAdjustorSendMail?account=${detail.claimsAccount}&casenumber=${detail.caseNumber}${queryString}" ><c:out value="${detail.claimAdjustorName}" /></a>
+							</c:when>
+							<c:otherwise>
+								<c:out value="${detail.claimAdjustorName}" />
+							</c:otherwise>
+						</c:choose>
+					</td>
+				</tr>
+			</c:if>
+			<tr>
+				<td>Claim Date</td>
+				<td colspan="2">
+				<c:choose>
+					<c:when test="${not empty detail.dateOfAccident}">
+						<fmt:formatDate value="${detail.dateOfAccident}" pattern="MM/dd/yyyy" />&nbsp;(<c:out value="${detail.dayOfAccident}"/>)
+					</c:when>
+					<c:otherwise><i>00/00/0000</i></c:otherwise>
+				</c:choose>
+				</td>
+			</tr>
+			<c:choose>
+				<c:when test="${not empty detail.backToWorkDate}">
+					<tr>
+						<td>Back to work</td>
+						<td colspan="2"><fmt:formatDate value="${detail.backToWorkDate}" pattern="MM/dd/yyyy" /></td>
+					</tr>
+				</c:when>
+			</c:choose>
+			<c:choose>
+				<c:when test="${not empty detail.claimType}">
+					<tr>
+						<td>Claim Type</td>
+						<td colspan="2"><c:out value="${detail.claimType}"/></td>
+					</tr>
+				</c:when>
+			</c:choose>
+			<c:choose>
+				<c:when test="${not empty detail.classCode}">
+					<tr>
+						<td>Class Code</td>
+						<td colspan="2"><c:out value="${detail.classCode}"/></td>
+					</tr>
+				</c:when>
+			</c:choose>
+			<c:choose>
+				<c:when test="${not empty detail.litigation}">
+					<tr>
+						<td>In Litigation</td>
+						<td colspan="2"><c:out value="${detail.litigation}"/></td>
+					</tr>
+				</c:when>
+			</c:choose>
+			<tr>
+				<td>Hire date</td>
+				<td colspan="2">
+				<c:choose>
+					<c:when test="${not empty detail.employeeHiredDate}">
+						<fmt:formatDate value="${detail.employeeHiredDate}" pattern="MM/dd/yyyy" />
+					</c:when>
+					<c:otherwise><i>00/00/0000</i></c:otherwise>
+				</c:choose>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">Description</td>
+				<td colspan="2"><c:out value="${detail.additionalDescOfInjury}" escapeXml="false"/></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">Deductible</td>
+				<td colspan="2">
+					<table>
+						<tr>
+							<td colspan="2"><span style="background-color: #F2F2F2;"><a href="${pageContext.request.contextPath}/ClaimsDeductibleHistory?account=${detail.claimsAccount}&casenumber=${detail.caseNumber}${queryString}">view history</a></span></td>
+						</tr>
+						<tr>
+							<td width="106">Billed This Month</td>
+							<td><fmt:formatNumber value="${detail.deductibleBilledThisMonth}" type="currency" /></td>
+						</tr>
+						<tr>
+							<td width="106">Billed To Date</td>
+							<td><fmt:formatNumber value="${detail.deductibleBilledToDate}" type="currency" /></td>
+						</tr>
+						<tr>
+							<td width="106">Remaining</td>
+							<td><fmt:formatNumber value="${detail.deductibleRemaining}" type="currency" /></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			
+				<tr>
+					<td style="vertical-align: top;">Location #:<c:out value="${detail.location.locationNumber}"/></td>
+					<td colspan="2">
+						<c:out value="${detail.location.locationName}" escapeXml="false"/><br />
+						<site:formatAddress address="${detail.location.locationAddress}" />
+					</td>
+				</tr>
+			
+		</table>
+		<br>
+		</div>
+		
+<!--  -->
+		<div style="border:0px gray solid;">
+		<div style="background-color: #F2F2F2; clear: both; border-bottom: 1px gray solid;">
+			<table width="100%">
+				<tr>
+					<td width="130" nowrap="nowrap">Policy Number</td>
+					<td>{{claim.policy}}</td>
+				</tr>
+				<tr>
+					<td>Policy Holder</td>
+					<td>City Cab Company of Orlando, Inc.</td>
+				</tr>
+				<tr>
+					<td>Policy Period</td>
+					<td>04/01/2015 - 04/01/2016</td>
+				</tr>					
+			</table>
+			<table width="100%">
+				<tr>
+					<td><strong>CABELLO, MICHELLE</strong><c:out value="${detail.employee.employeeName}" escapeXml="false"/></td>
+					<td style="text-align: right;">
+						<c:if test="${detail.claimStatus == 'Open' and detail.adjustorSummaryDocumentFound eq true}">
+							<a href="${pageContext.request.contextPath}/ClaimsAdjustorSummaryViewer?account=${detail.claimsAccount}&casenumber=${detail.caseNumber}" >Adjustor Summary</a>
+						</c:if>	
+					</td>
+				</tr>
+			</table>
+		</div>
+		<table width="100%">
+			<col style="width: 10em; vertical-align: top;" />
+			<tr>
+				<td width="90" nowrap="nowrap">Job Title</td>
+				<td width="150" nowrap="nowrap"><c:out value="${detail.employee.jobTitle}" escapeXml="false"/></td>
+				<td rowspan="10" style="vertical-align: top;" width="400">
+					<table>
+						<thead>
+							<tr>
+								<th width="100">&nbsp;</th>
+								<th style="text-align: right;" width="75">Indemnity</th>
+								<th style="text-align: right;" width="75">Medical</th>
+								<th style="text-align: right;" width="75">Other</th>
+								<th style="text-align: right;" width="75">Total</th>
+							</tr>
+						</thead>
+						<tr>
+							<td><strong>Paid this Month</strong></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidThisMonthIndemnity}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidThisMonthMedical}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidThisMonthOther}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidThisMonthTotal}" type="currency" /></td>
+						</tr>
+						<tr>
+							<td><strong>Paid To Date</strong></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidToDateIndemnity}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidToDateMedical}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidToDateOther}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidToDateTotal}" type="currency" /></td>
+						</tr>
+						<tr>
+							<td><strong>Reserves</strong></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.reservesIndemnity}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.reservesMedical}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.reservesOther}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.reservesTotal}" type="currency" /></td>
+						</tr>
+						<tr>
+							<td><strong>Total Incurred</strong></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.totalIncurredIndemnity}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.totalIncurredMedical}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.totalIncurredOther}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.totalIncurredTotal}" type="currency" /></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Injury</td>
+				<td><c:out value="${detail.descriptionOfInjury}" escapeXml="false"/></td>
+			</tr>
+			<tr>
+			  <td>Status</td>
+			  <td><c:out value="${detail.claimStatus}"/></td>
+		  	</tr>
+		  	<c:choose>
+			  	<c:when test="${not empty detail.claimDateClosed}">
+					<tr>
+					  <td>Closed Date</td>
+					  <td><fmt:formatDate value="${detail.claimDateClosed}" pattern="MM/dd/yyyy" /></td>
+				  	</tr>
+				</c:when>
+		  	</c:choose>
+			<tr>
+				<td>Case #</td>
+		        <td><fmt:formatNumber value="${detail.caseNumber}" pattern="000000"></fmt:formatNumber></td>
+			</tr>
+			<c:if test="${not empty detail.claimAdjustorName}">
+				<tr>
+					<td>Adjustor</td>
+					<td colspan="2">
+						<%--
+						If the adjustor can be contacted by e-mail, then we need to display the link.  Otherwise
+						we want to just display the name
+						--%>
+						<c:choose>
+							<c:when test="${detail.claimAdjustorEmailFound == true}">
+								<a href="${pageContext.request.contextPath}/ClaimsAdjustorSendMail?account=${detail.claimsAccount}&casenumber=${detail.caseNumber}${queryString}" ><c:out value="${detail.claimAdjustorName}" /></a>
+							</c:when>
+							<c:otherwise>
+								<c:out value="${detail.claimAdjustorName}" />
+							</c:otherwise>
+						</c:choose>
+					</td>
+				</tr>
+			</c:if>
+			<tr>
+				<td>Claim Date</td>
+				<td colspan="2">
+				<c:choose>
+					<c:when test="${not empty detail.dateOfAccident}">
+						<fmt:formatDate value="${detail.dateOfAccident}" pattern="MM/dd/yyyy" />&nbsp;(<c:out value="${detail.dayOfAccident}"/>)
+					</c:when>
+					<c:otherwise><i>00/00/0000</i></c:otherwise>
+				</c:choose>
+				</td>
+			</tr>
+			<c:choose>
+				<c:when test="${not empty detail.backToWorkDate}">
+					<tr>
+						<td>Back to work</td>
+						<td colspan="2"><fmt:formatDate value="${detail.backToWorkDate}" pattern="MM/dd/yyyy" /></td>
+					</tr>
+				</c:when>
+			</c:choose>
+			<c:choose>
+				<c:when test="${not empty detail.claimType}">
+					<tr>
+						<td>Claim Type</td>
+						<td colspan="2"><c:out value="${detail.claimType}"/></td>
+					</tr>
+				</c:when>
+			</c:choose>
+			<c:choose>
+				<c:when test="${not empty detail.classCode}">
+					<tr>
+						<td>Class Code</td>
+						<td colspan="2"><c:out value="${detail.classCode}"/></td>
+					</tr>
+				</c:when>
+			</c:choose>
+			<c:choose>
+				<c:when test="${not empty detail.litigation}">
+					<tr>
+						<td>In Litigation</td>
+						<td colspan="2"><c:out value="${detail.litigation}"/></td>
+					</tr>
+				</c:when>
+			</c:choose>
+			<tr>
+				<td>Hire date</td>
+				<td colspan="2">
+				<c:choose>
+					<c:when test="${not empty detail.employeeHiredDate}">
+						<fmt:formatDate value="${detail.employeeHiredDate}" pattern="MM/dd/yyyy" />
+					</c:when>
+					<c:otherwise><i>00/00/0000</i></c:otherwise>
+				</c:choose>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">Description</td>
+				<td colspan="2"><c:out value="${detail.additionalDescOfInjury}" escapeXml="false"/></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">Deductible</td>
+				<td colspan="2">
+					<table>
+						<tr>
+							<td colspan="2"><span style="background-color: #F2F2F2;"><a href="${pageContext.request.contextPath}/ClaimsDeductibleHistory?account=${detail.claimsAccount}&casenumber=${detail.caseNumber}${queryString}">view history</a></span></td>
+						</tr>
+						<tr>
+							<td width="106">Billed This Month</td>
+							<td><fmt:formatNumber value="${detail.deductibleBilledThisMonth}" type="currency" /></td>
+						</tr>
+						<tr>
+							<td width="106">Billed To Date</td>
+							<td><fmt:formatNumber value="${detail.deductibleBilledToDate}" type="currency" /></td>
+						</tr>
+						<tr>
+							<td width="106">Remaining</td>
+							<td><fmt:formatNumber value="${detail.deductibleRemaining}" type="currency" /></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			
+				<tr>
+					<td style="vertical-align: top;">Location #:<c:out value="${detail.location.locationNumber}"/></td>
+					<td colspan="2">
+						<c:out value="${detail.location.locationName}" escapeXml="false"/><br />
+						<site:formatAddress address="${detail.location.locationAddress}" />
+					</td>
+				</tr>
+			
+		</table>
+		<br>
+		</div>
+		<div style="border:0px gray solid;">
+		<div style="background-color: #F2F2F2; clear: both; border-bottom: 1px gray solid;">
+			<table width="100%">
+				<tr>
+					<td width="130" nowrap="nowrap">Policy Number</td>
+					<td>{{claim.policy}}</td>
+				</tr>
+				<tr>
+					<td>Policy Holder</td>
+					<td>City Cab Company of Orlando, Inc.</td>
+				</tr>
+				<tr>
+					<td>Policy Period</td>
+					<td>04/01/2015 - 04/01/2016</td>
+				</tr>					
+			</table>
+			<table width="100%">
+				<tr>
+					<td><strong>CABELLO, MICHELLE</strong><c:out value="${detail.employee.employeeName}" escapeXml="false"/></td>
+					<td style="text-align: right;">
+						<c:if test="${detail.claimStatus == 'Open' and detail.adjustorSummaryDocumentFound eq true}">
+							<a href="${pageContext.request.contextPath}/ClaimsAdjustorSummaryViewer?account=${detail.claimsAccount}&casenumber=${detail.caseNumber}" >Adjustor Summary</a>
+						</c:if>	
+					</td>
+				</tr>
+			</table>
+		</div>
+		<table width="100%">
+			<col style="width: 10em; vertical-align: top;" />
+			<tr>
+				<td width="90" nowrap="nowrap">Job Title</td>
+				<td width="150" nowrap="nowrap"><c:out value="${detail.employee.jobTitle}" escapeXml="false"/></td>
+				<td rowspan="10" style="vertical-align: top;" width="400">
+					<table>
+						<thead>
+							<tr>
+								<th width="100">&nbsp;</th>
+								<th style="text-align: right;" width="75">Indemnity</th>
+								<th style="text-align: right;" width="75">Medical</th>
+								<th style="text-align: right;" width="75">Other</th>
+								<th style="text-align: right;" width="75">Total</th>
+							</tr>
+						</thead>
+						<tr>
+							<td><strong>Paid this Month</strong></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidThisMonthIndemnity}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidThisMonthMedical}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidThisMonthOther}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidThisMonthTotal}" type="currency" /></td>
+						</tr>
+						<tr>
+							<td><strong>Paid To Date</strong></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidToDateIndemnity}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidToDateMedical}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidToDateOther}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidToDateTotal}" type="currency" /></td>
+						</tr>
+						<tr>
+							<td><strong>Reserves</strong></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.reservesIndemnity}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.reservesMedical}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.reservesOther}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.reservesTotal}" type="currency" /></td>
+						</tr>
+						<tr>
+							<td><strong>Total Incurred</strong></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.totalIncurredIndemnity}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.totalIncurredMedical}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.totalIncurredOther}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.totalIncurredTotal}" type="currency" /></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Injury</td>
+				<td><c:out value="${detail.descriptionOfInjury}" escapeXml="false"/></td>
+			</tr>
+			<tr>
+			  <td>Status</td>
+			  <td><c:out value="${detail.claimStatus}"/></td>
+		  	</tr>
+		  	<c:choose>
+			  	<c:when test="${not empty detail.claimDateClosed}">
+					<tr>
+					  <td>Closed Date</td>
+					  <td><fmt:formatDate value="${detail.claimDateClosed}" pattern="MM/dd/yyyy" /></td>
+				  	</tr>
+				</c:when>
+		  	</c:choose>
+			<tr>
+				<td>Case #</td>
+		        <td><fmt:formatNumber value="${detail.caseNumber}" pattern="000000"></fmt:formatNumber></td>
+			</tr>
+			<c:if test="${not empty detail.claimAdjustorName}">
+				<tr>
+					<td>Adjustor</td>
+					<td colspan="2">
+						<%--
+						If the adjustor can be contacted by e-mail, then we need to display the link.  Otherwise
+						we want to just display the name
+						--%>
+						<c:choose>
+							<c:when test="${detail.claimAdjustorEmailFound == true}">
+								<a href="${pageContext.request.contextPath}/ClaimsAdjustorSendMail?account=${detail.claimsAccount}&casenumber=${detail.caseNumber}${queryString}" ><c:out value="${detail.claimAdjustorName}" /></a>
+							</c:when>
+							<c:otherwise>
+								<c:out value="${detail.claimAdjustorName}" />
+							</c:otherwise>
+						</c:choose>
+					</td>
+				</tr>
+			</c:if>
+			<tr>
+				<td>Claim Date</td>
+				<td colspan="2">
+				<c:choose>
+					<c:when test="${not empty detail.dateOfAccident}">
+						<fmt:formatDate value="${detail.dateOfAccident}" pattern="MM/dd/yyyy" />&nbsp;(<c:out value="${detail.dayOfAccident}"/>)
+					</c:when>
+					<c:otherwise><i>00/00/0000</i></c:otherwise>
+				</c:choose>
+				</td>
+			</tr>
+			<c:choose>
+				<c:when test="${not empty detail.backToWorkDate}">
+					<tr>
+						<td>Back to work</td>
+						<td colspan="2"><fmt:formatDate value="${detail.backToWorkDate}" pattern="MM/dd/yyyy" /></td>
+					</tr>
+				</c:when>
+			</c:choose>
+			<c:choose>
+				<c:when test="${not empty detail.claimType}">
+					<tr>
+						<td>Claim Type</td>
+						<td colspan="2"><c:out value="${detail.claimType}"/></td>
+					</tr>
+				</c:when>
+			</c:choose>
+			<c:choose>
+				<c:when test="${not empty detail.classCode}">
+					<tr>
+						<td>Class Code</td>
+						<td colspan="2"><c:out value="${detail.classCode}"/></td>
+					</tr>
+				</c:when>
+			</c:choose>
+			<c:choose>
+				<c:when test="${not empty detail.litigation}">
+					<tr>
+						<td>In Litigation</td>
+						<td colspan="2"><c:out value="${detail.litigation}"/></td>
+					</tr>
+				</c:when>
+			</c:choose>
+			<tr>
+				<td>Hire date</td>
+				<td colspan="2">
+				<c:choose>
+					<c:when test="${not empty detail.employeeHiredDate}">
+						<fmt:formatDate value="${detail.employeeHiredDate}" pattern="MM/dd/yyyy" />
+					</c:when>
+					<c:otherwise><i>00/00/0000</i></c:otherwise>
+				</c:choose>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">Description</td>
+				<td colspan="2"><c:out value="${detail.additionalDescOfInjury}" escapeXml="false"/></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">Deductible</td>
+				<td colspan="2">
+					<table>
+						<tr>
+							<td colspan="2"><span style="background-color: #F2F2F2;"><a href="${pageContext.request.contextPath}/ClaimsDeductibleHistory?account=${detail.claimsAccount}&casenumber=${detail.caseNumber}${queryString}">view history</a></span></td>
+						</tr>
+						<tr>
+							<td width="106">Billed This Month</td>
+							<td><fmt:formatNumber value="${detail.deductibleBilledThisMonth}" type="currency" /></td>
+						</tr>
+						<tr>
+							<td width="106">Billed To Date</td>
+							<td><fmt:formatNumber value="${detail.deductibleBilledToDate}" type="currency" /></td>
+						</tr>
+						<tr>
+							<td width="106">Remaining</td>
+							<td><fmt:formatNumber value="${detail.deductibleRemaining}" type="currency" /></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			
+				<tr>
+					<td style="vertical-align: top;">Location #:<c:out value="${detail.location.locationNumber}"/></td>
+					<td colspan="2">
+						<c:out value="${detail.location.locationName}" escapeXml="false"/><br />
+						<site:formatAddress address="${detail.location.locationAddress}" />
+					</td>
+				</tr>
+			
+		</table>
+		<br>
+		</div>
+		<div style="border:0px gray solid;">
+		<div style="background-color: #F2F2F2; clear: both; border-bottom: 1px gray solid;">
+			<table width="100%">
+				<tr>
+					<td width="130" nowrap="nowrap">Policy Number</td>
+					<td>{{claim.policy}}</td>
+				</tr>
+				<tr>
+					<td>Policy Holder</td>
+					<td>City Cab Company of Orlando, Inc.</td>
+				</tr>
+				<tr>
+					<td>Policy Period</td>
+					<td>04/01/2015 - 04/01/2016</td>
+				</tr>					
+			</table>
+			<table width="100%">
+				<tr>
+					<td><strong>CABELLO, MICHELLE</strong><c:out value="${detail.employee.employeeName}" escapeXml="false"/></td>
+					<td style="text-align: right;">
+						<c:if test="${detail.claimStatus == 'Open' and detail.adjustorSummaryDocumentFound eq true}">
+							<a href="${pageContext.request.contextPath}/ClaimsAdjustorSummaryViewer?account=${detail.claimsAccount}&casenumber=${detail.caseNumber}" >Adjustor Summary</a>
+						</c:if>	
+					</td>
+				</tr>
+			</table>
+		</div>
+		<table width="100%">
+			<col style="width: 10em; vertical-align: top;" />
+			<tr>
+				<td width="90" nowrap="nowrap">Job Title</td>
+				<td width="150" nowrap="nowrap"><c:out value="${detail.employee.jobTitle}" escapeXml="false"/></td>
+				<td rowspan="10" style="vertical-align: top;" width="400">
+					<table>
+						<thead>
+							<tr>
+								<th width="100">&nbsp;</th>
+								<th style="text-align: right;" width="75">Indemnity</th>
+								<th style="text-align: right;" width="75">Medical</th>
+								<th style="text-align: right;" width="75">Other</th>
+								<th style="text-align: right;" width="75">Total</th>
+							</tr>
+						</thead>
+						<tr>
+							<td><strong>Paid this Month</strong></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidThisMonthIndemnity}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidThisMonthMedical}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidThisMonthOther}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidThisMonthTotal}" type="currency" /></td>
+						</tr>
+						<tr>
+							<td><strong>Paid To Date</strong></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidToDateIndemnity}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidToDateMedical}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidToDateOther}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidToDateTotal}" type="currency" /></td>
+						</tr>
+						<tr>
+							<td><strong>Reserves</strong></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.reservesIndemnity}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.reservesMedical}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.reservesOther}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.reservesTotal}" type="currency" /></td>
+						</tr>
+						<tr>
+							<td><strong>Total Incurred</strong></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.totalIncurredIndemnity}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.totalIncurredMedical}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.totalIncurredOther}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.totalIncurredTotal}" type="currency" /></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Injury</td>
+				<td><c:out value="${detail.descriptionOfInjury}" escapeXml="false"/></td>
+			</tr>
+			<tr>
+			  <td>Status</td>
+			  <td><c:out value="${detail.claimStatus}"/></td>
+		  	</tr>
+		  	<c:choose>
+			  	<c:when test="${not empty detail.claimDateClosed}">
+					<tr>
+					  <td>Closed Date</td>
+					  <td><fmt:formatDate value="${detail.claimDateClosed}" pattern="MM/dd/yyyy" /></td>
+				  	</tr>
+				</c:when>
+		  	</c:choose>
+			<tr>
+				<td>Case #</td>
+		        <td><fmt:formatNumber value="${detail.caseNumber}" pattern="000000"></fmt:formatNumber></td>
+			</tr>
+			<c:if test="${not empty detail.claimAdjustorName}">
+				<tr>
+					<td>Adjustor</td>
+					<td colspan="2">
+						<%--
+						If the adjustor can be contacted by e-mail, then we need to display the link.  Otherwise
+						we want to just display the name
+						--%>
+						<c:choose>
+							<c:when test="${detail.claimAdjustorEmailFound == true}">
+								<a href="${pageContext.request.contextPath}/ClaimsAdjustorSendMail?account=${detail.claimsAccount}&casenumber=${detail.caseNumber}${queryString}" ><c:out value="${detail.claimAdjustorName}" /></a>
+							</c:when>
+							<c:otherwise>
+								<c:out value="${detail.claimAdjustorName}" />
+							</c:otherwise>
+						</c:choose>
+					</td>
+				</tr>
+			</c:if>
+			<tr>
+				<td>Claim Date</td>
+				<td colspan="2">
+				<c:choose>
+					<c:when test="${not empty detail.dateOfAccident}">
+						<fmt:formatDate value="${detail.dateOfAccident}" pattern="MM/dd/yyyy" />&nbsp;(<c:out value="${detail.dayOfAccident}"/>)
+					</c:when>
+					<c:otherwise><i>00/00/0000</i></c:otherwise>
+				</c:choose>
+				</td>
+			</tr>
+			<c:choose>
+				<c:when test="${not empty detail.backToWorkDate}">
+					<tr>
+						<td>Back to work</td>
+						<td colspan="2"><fmt:formatDate value="${detail.backToWorkDate}" pattern="MM/dd/yyyy" /></td>
+					</tr>
+				</c:when>
+			</c:choose>
+			<c:choose>
+				<c:when test="${not empty detail.claimType}">
+					<tr>
+						<td>Claim Type</td>
+						<td colspan="2"><c:out value="${detail.claimType}"/></td>
+					</tr>
+				</c:when>
+			</c:choose>
+			<c:choose>
+				<c:when test="${not empty detail.classCode}">
+					<tr>
+						<td>Class Code</td>
+						<td colspan="2"><c:out value="${detail.classCode}"/></td>
+					</tr>
+				</c:when>
+			</c:choose>
+			<c:choose>
+				<c:when test="${not empty detail.litigation}">
+					<tr>
+						<td>In Litigation</td>
+						<td colspan="2"><c:out value="${detail.litigation}"/></td>
+					</tr>
+				</c:when>
+			</c:choose>
+			<tr>
+				<td>Hire date</td>
+				<td colspan="2">
+				<c:choose>
+					<c:when test="${not empty detail.employeeHiredDate}">
+						<fmt:formatDate value="${detail.employeeHiredDate}" pattern="MM/dd/yyyy" />
+					</c:when>
+					<c:otherwise><i>00/00/0000</i></c:otherwise>
+				</c:choose>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">Description</td>
+				<td colspan="2"><c:out value="${detail.additionalDescOfInjury}" escapeXml="false"/></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">Deductible</td>
+				<td colspan="2">
+					<table>
+						<tr>
+							<td colspan="2"><span style="background-color: #F2F2F2;"><a href="${pageContext.request.contextPath}/ClaimsDeductibleHistory?account=${detail.claimsAccount}&casenumber=${detail.caseNumber}${queryString}">view history</a></span></td>
+						</tr>
+						<tr>
+							<td width="106">Billed This Month</td>
+							<td><fmt:formatNumber value="${detail.deductibleBilledThisMonth}" type="currency" /></td>
+						</tr>
+						<tr>
+							<td width="106">Billed To Date</td>
+							<td><fmt:formatNumber value="${detail.deductibleBilledToDate}" type="currency" /></td>
+						</tr>
+						<tr>
+							<td width="106">Remaining</td>
+							<td><fmt:formatNumber value="${detail.deductibleRemaining}" type="currency" /></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			
+				<tr>
+					<td style="vertical-align: top;">Location #:<c:out value="${detail.location.locationNumber}"/></td>
+					<td colspan="2">
+						<c:out value="${detail.location.locationName}" escapeXml="false"/><br />
+						<site:formatAddress address="${detail.location.locationAddress}" />
+					</td>
+				</tr>
+			
+		</table>
+		<br>
+		</div>
+		<div style="border:0px gray solid;">
+		<div style="background-color: #F2F2F2; clear: both; border-bottom: 1px gray solid;">
+			<table width="100%">
+				<tr>
+					<td width="130" nowrap="nowrap">Policy Number</td>
+					<td>{{claim.policy}}</td>
+				</tr>
+				<tr>
+					<td>Policy Holder</td>
+					<td>City Cab Company of Orlando, Inc.</td>
+				</tr>
+				<tr>
+					<td>Policy Period</td>
+					<td>04/01/2015 - 04/01/2016</td>
+				</tr>					
+			</table>
+			<table width="100%">
+				<tr>
+					<td><strong>CABELLO, MICHELLE</strong><c:out value="${detail.employee.employeeName}" escapeXml="false"/></td>
+					<td style="text-align: right;">
+						<c:if test="${detail.claimStatus == 'Open' and detail.adjustorSummaryDocumentFound eq true}">
+							<a href="${pageContext.request.contextPath}/ClaimsAdjustorSummaryViewer?account=${detail.claimsAccount}&casenumber=${detail.caseNumber}" >Adjustor Summary</a>
+						</c:if>	
+					</td>
+				</tr>
+			</table>
+		</div>
+		<table width="100%">
+			<col style="width: 10em; vertical-align: top;" />
+			<tr>
+				<td width="90" nowrap="nowrap">Job Title</td>
+				<td width="150" nowrap="nowrap"><c:out value="${detail.employee.jobTitle}" escapeXml="false"/></td>
+				<td rowspan="10" style="vertical-align: top;" width="400">
+					<table>
+						<thead>
+							<tr>
+								<th width="100">&nbsp;</th>
+								<th style="text-align: right;" width="75">Indemnity</th>
+								<th style="text-align: right;" width="75">Medical</th>
+								<th style="text-align: right;" width="75">Other</th>
+								<th style="text-align: right;" width="75">Total</th>
+							</tr>
+						</thead>
+						<tr>
+							<td><strong>Paid this Month</strong></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidThisMonthIndemnity}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidThisMonthMedical}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidThisMonthOther}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidThisMonthTotal}" type="currency" /></td>
+						</tr>
+						<tr>
+							<td><strong>Paid To Date</strong></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidToDateIndemnity}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidToDateMedical}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidToDateOther}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.paidToDateTotal}" type="currency" /></td>
+						</tr>
+						<tr>
+							<td><strong>Reserves</strong></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.reservesIndemnity}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.reservesMedical}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.reservesOther}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.reservesTotal}" type="currency" /></td>
+						</tr>
+						<tr>
+							<td><strong>Total Incurred</strong></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.totalIncurredIndemnity}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.totalIncurredMedical}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.totalIncurredOther}" type="currency" /></td>
+							<td style="text-align: right;"><fmt:formatNumber value="${detail.totalIncurredTotal}" type="currency" /></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>Injury</td>
+				<td><c:out value="${detail.descriptionOfInjury}" escapeXml="false"/></td>
+			</tr>
+			<tr>
+			  <td>Status</td>
+			  <td><c:out value="${detail.claimStatus}"/></td>
+		  	</tr>
+		  	<c:choose>
+			  	<c:when test="${not empty detail.claimDateClosed}">
+					<tr>
+					  <td>Closed Date</td>
+					  <td><fmt:formatDate value="${detail.claimDateClosed}" pattern="MM/dd/yyyy" /></td>
+				  	</tr>
+				</c:when>
+		  	</c:choose>
+			<tr>
+				<td>Case #</td>
+		        <td><fmt:formatNumber value="${detail.caseNumber}" pattern="000000"></fmt:formatNumber></td>
+			</tr>
+			<c:if test="${not empty detail.claimAdjustorName}">
+				<tr>
+					<td>Adjustor</td>
+					<td colspan="2">
+						<%--
+						If the adjustor can be contacted by e-mail, then we need to display the link.  Otherwise
+						we want to just display the name
+						--%>
+						<c:choose>
+							<c:when test="${detail.claimAdjustorEmailFound == true}">
+								<a href="${pageContext.request.contextPath}/ClaimsAdjustorSendMail?account=${detail.claimsAccount}&casenumber=${detail.caseNumber}${queryString}" ><c:out value="${detail.claimAdjustorName}" /></a>
+							</c:when>
+							<c:otherwise>
+								<c:out value="${detail.claimAdjustorName}" />
+							</c:otherwise>
+						</c:choose>
+					</td>
+				</tr>
+			</c:if>
+			<tr>
+				<td>Claim Date</td>
+				<td colspan="2">
+				<c:choose>
+					<c:when test="${not empty detail.dateOfAccident}">
+						<fmt:formatDate value="${detail.dateOfAccident}" pattern="MM/dd/yyyy" />&nbsp;(<c:out value="${detail.dayOfAccident}"/>)
+					</c:when>
+					<c:otherwise><i>00/00/0000</i></c:otherwise>
+				</c:choose>
+				</td>
+			</tr>
+			<c:choose>
+				<c:when test="${not empty detail.backToWorkDate}">
+					<tr>
+						<td>Back to work</td>
+						<td colspan="2"><fmt:formatDate value="${detail.backToWorkDate}" pattern="MM/dd/yyyy" /></td>
+					</tr>
+				</c:when>
+			</c:choose>
+			<c:choose>
+				<c:when test="${not empty detail.claimType}">
+					<tr>
+						<td>Claim Type</td>
+						<td colspan="2"><c:out value="${detail.claimType}"/></td>
+					</tr>
+				</c:when>
+			</c:choose>
+			<c:choose>
+				<c:when test="${not empty detail.classCode}">
+					<tr>
+						<td>Class Code</td>
+						<td colspan="2"><c:out value="${detail.classCode}"/></td>
+					</tr>
+				</c:when>
+			</c:choose>
+			<c:choose>
+				<c:when test="${not empty detail.litigation}">
+					<tr>
+						<td>In Litigation</td>
+						<td colspan="2"><c:out value="${detail.litigation}"/></td>
+					</tr>
+				</c:when>
+			</c:choose>
+			<tr>
+				<td>Hire date</td>
+				<td colspan="2">
+				<c:choose>
+					<c:when test="${not empty detail.employeeHiredDate}">
+						<fmt:formatDate value="${detail.employeeHiredDate}" pattern="MM/dd/yyyy" />
+					</c:when>
+					<c:otherwise><i>00/00/0000</i></c:otherwise>
+				</c:choose>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">Description</td>
+				<td colspan="2"><c:out value="${detail.additionalDescOfInjury}" escapeXml="false"/></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;">Deductible</td>
+				<td colspan="2">
+					<table>
+						<tr>
+							<td colspan="2"><span style="background-color: #F2F2F2;"><a href="${pageContext.request.contextPath}/ClaimsDeductibleHistory?account=${detail.claimsAccount}&casenumber=${detail.caseNumber}${queryString}">view history</a></span></td>
+						</tr>
+						<tr>
+							<td width="106">Billed This Month</td>
+							<td><fmt:formatNumber value="${detail.deductibleBilledThisMonth}" type="currency" /></td>
+						</tr>
+						<tr>
+							<td width="106">Billed To Date</td>
+							<td><fmt:formatNumber value="${detail.deductibleBilledToDate}" type="currency" /></td>
+						</tr>
+						<tr>
+							<td width="106">Remaining</td>
+							<td><fmt:formatNumber value="${detail.deductibleRemaining}" type="currency" /></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			
+				<tr>
+					<td style="vertical-align: top;">Location #:<c:out value="${detail.location.locationNumber}"/></td>
+					<td colspan="2">
+						<c:out value="${detail.location.locationName}" escapeXml="false"/><br />
+						<site:formatAddress address="${detail.location.locationAddress}" />
+					</td>
+				</tr>
+			
+		</table>
+		<br>
+		</div>
+
+<!--  -->		
+
+	</div>	
+</div>

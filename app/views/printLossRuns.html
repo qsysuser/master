@@ -1,0 +1,55 @@
+<style>
+div #search_lossRuns_policy_entry, 
+#search_lossRuns_policy_period, #search_lossRuns_valuation_date, #search_lossRuns_submit  {
+	margin-top: 10px;
+	vertical-align:top; 
+}	
+</style>
+<div id="search_lossRuns_policy_entry">
+  <table>
+		<tr>
+			<td width="140">Policy Number</td>
+			<td>
+				<input type="text" value="0830-00001">
+			</td>
+		</tr>
+   </table>	
+</div>   
+<div id="search_lossRuns_policy_period">
+   <table>	
+  	<tr>
+  		<td width="140">Policy Period</td>
+  		<td>
+  			<select id="lossRun" name="lossRun">
+  				<option>All</option>
+  				<option>04/20/2010 - 09/13/2011</option>
+  				<option>04/20/2010 - 09/13/2012</option>
+  				<option>04/20/2010 - 06/01/2013</option>
+  				<option>04/20/2010 - 09/01/2014/</option>
+  				<option>04/20/2010 - 10/01/2015</option>
+  			</select>
+  		</td>
+  	</tr>
+  </table>
+</div>
+<div id="search_lossRuns_valuation_date">
+   <table>	
+   	<tr>
+   		<td width="140"></td>
+   		<td>
+   			<input type="checkbox"> Valuation date?
+   		</td>
+   	</tr>
+  </table>
+</div>  
+<div id="search_lossRuns_submit">
+	<table>
+		<tr>
+			<td>
+				<a ui-sref="searchResult">
+					<button class="btn btn-default navbar-btn">Print</button>
+				</a>
+			</td>
+		</tr>
+	</table>
+</div>

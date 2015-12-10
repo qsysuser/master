@@ -1,35 +1,8 @@
 <h1>Claim Search</h1>
 <ul class="nav nav-tabs">
-	<li><a ui-sref="searchByPolicy">Search by Policy</a></li>
-	<li><a ui-sref="searchByIW">Search by Injured Worker</a></li>
-	<li><a ui-sref="searchByCaseNumber">Search by Case Number</a></li>
-	<li class="active"><a ui-sref="printLossRuns">Print Loss Runs</a></li>	
+	<li ui-sref-active="active"><a ui-sref="searchByPolicy">Search by Policy</a></li>
+	<li ui-sref-active="active"><a ui-sref="searchByIW">Search by Injured Worker</a></li>
+	<li ui-sref-active="active"><a ui-sref="searchByCaseNumber">Search by Case Number</a></li>
+	<li ui-sref-active="active"><a ui-sref="printLossRuns">Print Loss Runs</a></li>	
 </ul>
-
-<div class="tab-content">
-	<div class="tab-pane faide in active" id="searchByPolicy">
-		<div ui-view="searchByPolicy"></div>
-	</div>
-	<div class="tab-pane fade" id="searchByIW">
-		<div ui-view="searchByIW"></div>
-	</div>
-	<div class="tab-pane fade" id="searchByCaseNumber">
-		<div ui-view="searchByCaseNumber"></div>
-	</div>
-	<div class="tab-pane fade" id="printLossRuns">
-		<div ui-view="printLossRuns"></div>
-	</div>
-</div>
-<script type="text/javascript">
-$(document).ready(function() {
-	$(".nav-tabs a").click(function(){
-		$(this).tab('show');
-	});
-	$('.nav-tabs a').on('shown.bs.tab', function(event) {
-		var x = $(event.target).text();
-		var y = $(event.relatedTarget).text();
-		$(".act span").text(x);
-		$(".prev span").text(y);
-	});
-});
-</script>
+<div ui-view="claimSearch@View"></div>

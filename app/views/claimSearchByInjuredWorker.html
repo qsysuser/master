@@ -1,0 +1,55 @@
+<style>
+div #search_iw_name, #search_iw_status, #search_iw_submit, #search_iw_typeOfClaim {
+	margin-top: 10px;
+	vertical-align:top; 
+}	
+</style>
+<div id="search_iw_name">
+	<table>
+		<tr>
+			<td width="140">Injured Worker's Name</td>
+			<td>
+				<input id="injuredWorkerName" maxlength="60" size="60" />
+			</td>
+		</tr>
+	</table> 	
+</div>
+<div id="search_iw_status">
+	<table>
+		<tr>
+			<td width="140">Status</td>
+			<td>
+				<select>
+					<option>All</option>
+					<option>Open</option>
+					<option>Closed</option>
+				</select>
+			</td>
+		</tr>
+	</table>
+</div>
+<div id="search_iw_typeOfClaim">
+	<table>
+		<tr>
+			<td width="140">Type of Claim</td>
+			<td>
+				<select>
+					<option>All</option>
+					<option>Loss Time</option>
+					<option>Medical Only</option>
+				</select>
+			</td>
+		</tr>
+	</table>
+</div>
+<div id="search_iw_submit">
+	<table>
+		<tr>
+			<td>
+				<a ui-sref="searchResult">
+					<button class="btn btn-default navbar-btn">Search</button>
+				</a>
+			</td>
+		</tr>
+	</table>
+</div>

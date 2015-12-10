@@ -1,1 +1,175 @@
-<p>This is a test.</p>
+<style>
+div #search_policy_entry, #search_policy_selection, 
+#search_policy_status_units,#search_policy_status, 
+#search_policy_submit, #search_policy_typeOfClaim {
+	margin-top: 10px;
+	vertical-align:top; 
+}	
+</style>
+<!-- 
+Submitted: {{form.$submitted}}
+<br>
+
+Whole form: {{form}}
+
+<br>
+Whole form.ERROR: {{form.$error}}
+ -->
+<form name="form" ng-submit="claimSrcByPol.onFormSubmit(searchByPolicy)">
+	<div id="search_policy_entry">
+		<table>
+			<tr>
+				<td width="140">Policy Number</td>
+				<td>
+					<input name="number" required type="text"
+						ng-init="searchByPolicy.number = claimSrcByPol.number" 
+						ng-model="searchByPolicy.number">
+						<span style="color: red;" ng-show="form.number.$dirty && 
+						form.number.$error.required">Policy Number is required.</span>
+				</td>
+			</tr>
+		</table>
+	</div>				
+	<div id="search_policy_selection">
+		<div id="search_policy_select_period" style="float: left;">
+			<table>
+				<tr>
+					<td width="140"></td>
+					<td>
+						<table>
+							<tr>
+								<td>
+									<select name="policy_period"
+									ng-init="searchByPolicy.periods.selectedOption = claimSrcByPol.periods[0]"
+									ng-model="searchByPolicy.periods.selectedOption"
+									ng-options="option.name for option in claimSrcByPol.periods track by option.value">
+									</select>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div id="search_policy_select_year" style="float: left;">
+			<table>
+				<tr>
+					<td></td>
+					<td>
+						<table>
+							<tr>
+								<td>
+								<td>
+									<select name="policy_year"
+									ng-init="searchByPolicy.years.selectedOption = claimSrcByPol.years[0]"
+									ng-model="searchByPolicy.years.selectedOption"
+									ng-options="option.year for option in claimSrcByPol.years">
+									</select>
+								</td>
+								</td>
+							</tr>
+							
+						</table>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div id="search_policy_status_units" style="clear: both;">
+		<table>
+			<tr>
+				<td width="140"></td>
+				<td>
+					<table>
+						<tr>
+							<td>
+								<input type="checkbox"> AL - 304 Wes Lane, Birmingham(0101)
+								<br>
+								<select style="padding-left: 10px;">
+									<option>All Years</option>
+									<option>5 Years</option>
+									<option>3 Years</option>
+									<option>1 Year</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="checkbox"> AL - 304 Wes Lane, Birmingham(0101)
+							</td>
+						</tr>
+	
+						<tr>
+							<td>
+								<input type="checkbox"> AL - 304 Wes Lane, Birmingham(0101)
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="checkbox"> AL - 304 Wes Lane, Birmingham(0101)
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="checkbox"> AL - 304 Wes Lane, Birmingham(0101)
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="checkbox"> AL - 304 Wes Lane, Birmingham(0101)
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="checkbox"> AL - 304 Wes Lane, Birmingham(0101)
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="checkbox"> AL - 304 Wes Lane, Birmingham(0101)
+							</td>
+						</tr>
+						
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="search_policy_status">
+		<table>
+			<tr>
+				<td width="140">Status</td>
+				<td>
+					<select>
+						<option>All</option>
+						<option>Open</option>
+						<option>Closed</option>
+					</select>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="search_policy_typeOfClaim">
+		<table>
+			<tr>
+				<td width="140">Type of Claim</td>
+				<td>
+					<select>
+						<option>All</option>
+						<option>Loss Time</option>
+						<option>Medical Only</option>
+					</select>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="search_policy_submit">
+		<table>
+			<tr>
+				<td>
+					<button type="submit" class="btn btn-default navbar-btn">Search</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+</form>

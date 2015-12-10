@@ -13,10 +13,10 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, IdlePro
   
   //claim search
   .state('searchByPolicy', {
-    url: '/search/policy',
+    url: '/search/policy?number',
     data: {
     	title: 'Claim Search',
-        with_vertical_bar: false    
+        with_vertical_bar: false
     },
     views: {
         'side-navigation': {
@@ -25,13 +25,15 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, IdlePro
         },
  	    'main': {
  	 	    url: '',
-		    templateUrl: 'claimSearch.html'
+		    templateUrl: 'claimSearch.html',
+		    controller: 'ClaimSearchController',
+			controllerAs: 'claimSearch'
 	    },
- 	    'searchByPolicy': {
+ 	    'claimSearch@View': {
  	 	    url: '',
 		    templateUrl: 'claimSearchByPolicy.html',
-		    controller: 'ClaimSearchController',
-		    controllerAs: 'claimSearch'
+		    controller: 'ClaimSearchByPolicyCrtl',
+		    controllerAs: 'claimSrcByPol'
 	    }
     }
   })
@@ -51,9 +53,9 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, IdlePro
  	 	    url: '',
 		    templateUrl: 'claimSearch.html'
 	    },
- 	    'searchByIW': {
+ 	    'claimSearch@View': {
  	 	    url: '',
-		    templateUrl: 'claimSearchByPolicy.html',
+ 	 	    templateUrl: 'claimSearchByInjuredWorker.html',
 		    controller: 'ClaimSearchController',
 		    controllerAs: 'claimSearch'
 	    }
@@ -75,9 +77,9 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, IdlePro
  	 	    url: '',
 		    templateUrl: 'claimSearch.html'
 	    },
- 	    'searchByCaseNumber': {
+ 	    'claimSearch@View': {
  	 	    url: '',
-		    templateUrl: 'claimSearchByPolicy.html',
+ 	 	    templateUrl: 'claimSearchByCaseNumber.html',
 		    controller: 'ClaimSearchController',
 		    controllerAs: 'claimSearch'
 	    }
@@ -99,9 +101,9 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, IdlePro
  	 	    url: '',
 		    templateUrl: 'claimSearch.html'
 	    },
- 	    'printLossRuns': {
+ 	    'claimSearch@View': {
  	 	    url: '',
-		    templateUrl: 'claimSearchByPolicy.html',
+		    templateUrl: 'printLossRuns.html',
 		    controller: 'ClaimSearchController',
 		    controllerAs: 'claimSearch'
 	    }
@@ -110,8 +112,8 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, IdlePro
   
   
   //search result
-  .state('result', {
-	url: '/result',
+  .state('searchResult', {
+	url: '/search/result',
     views: {
         'side-navigation': {
 			url: '',
@@ -119,21 +121,9 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, IdlePro
         },
         'main': {
 			url: '',
-		    templateUrl: 'home.html',
+		    templateUrl: 'claimSearchResult.html',
 			controller: 'MainController',
-			controllerAs: 'home'
-        },
-        'middle': {
-			url: '',
-		    templateUrl: 'home.html',
-			controller: 'MainController',
-			controllerAs: 'home'
-        },
-        'bottom': {
-			url: '',
-		    templateUrl: 'home.html',
-			controller: 'MainController',
-			controllerAs: 'home'
+			controllerAs: 'claimSearchResult'
         }
     },
     
@@ -147,6 +137,7 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, IdlePro
 		  
   });
 
+  //window.alert(window.location);
   $urlRouterProvider.otherwise('/search/policy');
 
 }
