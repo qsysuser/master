@@ -1,7 +1,9 @@
 'use strict';
 
-function ClaimSearchByPolicyCrtl($state, $stateParams) {
+function ClaimSearchByPolicyCrtl($state, $stateParams, $route, ClaimSearchByPolicyService) {
   'ngInject';
+  
+  $route.reload();
   
   const vm = this;
   
@@ -23,9 +25,11 @@ function ClaimSearchByPolicyCrtl($state, $stateParams) {
   ];
   
   vm.onFormSubmit = function(searchByPolicy) {
-	  console.log(searchByPolicy); 
+
+	  ClaimSearchByPolicyService.setData(searchByPolicy);
+	  
 	  $state.go('searchResult');
-  }
+  };
 }
 
 export default {

@@ -122,8 +122,8 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, IdlePro
         'main': {
 			url: '',
 		    templateUrl: 'claimSearchResult.html',
-			controller: 'MainController',
-			controllerAs: 'claimSearchResult'
+			controller: 'ClaimSearchResultCrtl',
+			controllerAs: 'claimSrcResult'
         }
     },
     
